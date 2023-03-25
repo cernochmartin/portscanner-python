@@ -1,25 +1,24 @@
 import socket
-from termcolor import cprint
 
 def scan(target, ports):
 	print('\n' + ' Starting Scan For ' + str(target))
-	for port in range(1, ports):
-		scan_port(target, port)
+	for port in range(1,ports):
+		scan_port(target,port)
 
 def scan_port(ipaddress, port):
 	try:
 		sock = socket.socket()
 		sock.connect((ipaddress, port))
-		cprint("[+] PORT | OPEN | " + str(port), "light_green")
+		print("[+] PORT | OPEN | " + str(port))
 		sock.close()
 	except:
-		cprint("[-] PORT | CLOSE | " + str(port), "light_red")
+		print("[-] PORT | CLOSE | " + str(port))
 
-targets = input("[*] Enter targets to scan(split them by a ,): ")
-ports = int(input("[*] Enter how many ports you want to scan: "))
+targets = input("[*] Enter Targets To Scan (split them by a ,): ")
+ports = int(input("[*] Enter How Many Ports You Want To Scan: "))
 if ',' in targets:
-	print("[*] Scanning multiple targets")
+	print("[*] Scanning Multiple Targets")
 	for ip_addr in targets.split(','):
 		scan(ip_addr.strip(' '), ports)
 else:
-	scan(targets, ports)
+	scan(targets,ports)
